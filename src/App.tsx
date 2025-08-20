@@ -1,17 +1,45 @@
-import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import './App.css'
-import SqlInput from './components/SqlToTypeScript/SqlInput'
-import SqlOutput from './components/SqlToTypeScript/SqlOutput'
+import Footer from './components/Footer'
+import SqlToTypeScript from './components/SqlToTypeScript/SqlToTypeScript';
+import ErrorPage from './components/ErrorPage';
+import TypeScriptToSql from './components/TypeScriptToSql/TypeScriptToSql';
 
 function App() {
 
-  const [sqlQuery, setSqlQuery] = useState('')
-
   return (
-    <div>
-      <SqlInput value={sqlQuery} onChange={setSqlQuery} />
-      <SqlOutput value={sqlQuery} />
-    </div>
+    <div className='app'>
+
+      <header>
+        <nav>
+          <ul>
+            <li>
+              <a href='/sql-to-typescript'>SQL -{'>'} TypeScript</a>
+            </li>
+            <li>
+              <a href='/typescript-to-sql'>TypeScript -{'>'} SQL</a>
+            </li>
+          </ul>
+        </nav>
+      </header>
+
+      <div className='container'>
+
+        <Router>
+          <Routes>
+            <Route path='/sql-to-typescript' element={<SqlToTypeScript />} />
+            <Route path='/typescript-to-sql' element={<TypeScriptToSql />} />
+            <Route path='/' element={<Navigate to='/sql-to-typescript' />} />
+            <Route path='*' element={<ErrorPage />} />
+          </Routes>
+        </Router>
+
+      </div>
+
+      <footer className='container'>
+        <Footer />
+      </footer>
+    </div >
   )
 }
 
