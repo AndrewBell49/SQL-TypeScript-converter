@@ -36,9 +36,7 @@ function App() {
 
       </div>
 
-      <footer>
-        <Footer />
-      </footer>
+      <Footer />
     </div >
   )
 }

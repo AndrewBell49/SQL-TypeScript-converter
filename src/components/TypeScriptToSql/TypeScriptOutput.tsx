@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { getIndexOfAll } from '../SqlToTypeScript/helpers/SqlOutputHelpers.ts'
 import SqlQuery from "./SqlQuery.tsx"
+import QueryContext from "./context/QueryContext.ts"
 
 interface SqlOutputBoxParams {
   value: string
@@ -32,14 +33,16 @@ export default function TypeScriptOutput(
   }, [value]);
 
   return (
-    <div className="sqlOutput">
-      {
-        sqlQueries.map((query, i) =>
-          <>
-            <h2>Query {i + 1}</h2>
-            <SqlQuery query={query} />
-          </>)
-      }
-    </div>
+    <QueryContext value={value}>
+      <div className="sqlOutput">
+        {
+          sqlQueries.map((query, i) =>
+            <>
+              <h2>Query {i + 1}</h2>
+              <SqlQuery query={query.trim()} />
+            </>)
+        }
+      </div>
+    </QueryContext>
   )
 }

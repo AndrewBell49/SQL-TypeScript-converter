@@ -26,6 +26,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .container {
@@ -81,6 +82,7 @@ body>footer {
 footer {
   font-size: 13px;
   text-align: right;
+  width: 100%
 }
 
 a {
