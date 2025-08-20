@@ -78,6 +78,11 @@ body>footer {
   display: table-row;
 }
 
+footer {
+  font-size: 13px;
+  text-align: right;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
