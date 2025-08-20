@@ -138,6 +138,7 @@ input {
 
 span {
   white-space: pre;
+  display: inline-block
 }
 
 .variableChoice {

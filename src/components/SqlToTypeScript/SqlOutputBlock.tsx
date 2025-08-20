@@ -15,7 +15,7 @@ export default function SqlOutputBlock(
     <div className='sqlOutput'>
       {
         [...Array(vars.length)].map((_x, i) =>
-          <span>
+          <>
 
             <span>
               {texts[i].split('\n').map((line, idx) => (
@@ -31,7 +31,7 @@ export default function SqlOutputBlock(
               : <></>
             }
 
-          </span>
+          </>
         )
       }
       <span>
