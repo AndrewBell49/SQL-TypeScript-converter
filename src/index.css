@@ -20,9 +20,16 @@
 html,
 body {
   margin: 0;
-  padding: 0;
-  height: 100%;
-  font-family: sans-serif;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
 }
 
 .layout {
@@ -38,7 +45,6 @@ header {
   width: 100%;
   background-color: #1a1a1a;
   padding: 1rem 2rem;
-  z-index: 1000;
   justify-items: center;
 }
 
@@ -65,7 +71,7 @@ nav li a:hover {
 
 main {
   flex: 1;
-  padding-top: 80px;
+  padding-top: 2rem;
 }
 
 body>footer {
