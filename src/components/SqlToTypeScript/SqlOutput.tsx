@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import SqlOutputBlock from './SqlOutputBlock';
 import { variableNameSchema, type variablesInterface } from './helpers/types';
 import { arraysEqual } from './helpers/utils';
-import { getIndexOfAll, getTextForCopying, isInputError, splitInput } from './helpers/SqlOutputHelpers';
+import { getIndexOfAll, getTextForCopying, isInputError, replaceColonWithBraces, splitInput } from './helpers/SqlOutputHelpers';
 import { z } from 'zod'
 
 function syncVariableStates(
@@ -78,8 +78,10 @@ export default function SqlOutput(
   }
 
   useEffect(() => {
-    const leftBraces = getIndexOfAll('{{', value);
-    const rightBraces = getIndexOfAll('}}', value);
+    const colonReplace = replaceColonWithBraces(value);
+
+    const leftBraces = getIndexOfAll('{{', colonReplace);
+    const rightBraces = getIndexOfAll('}}', colonReplace);
 
     const { error, msg } = isInputError({ leftBraces, rightBraces })
     if (error) {
@@ -88,7 +90,7 @@ export default function SqlOutput(
       setInputError(true);
     } else {
       setInputError(false);
-      const { texts, vars } = splitInput({ text: value, leftBraces, rightBraces });
+      const { texts, vars } = splitInput({ text: colonReplace, leftBraces, rightBraces });
       setTexts(texts)
       setVars(vars)
 

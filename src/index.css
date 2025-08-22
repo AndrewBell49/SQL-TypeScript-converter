@@ -144,7 +144,7 @@ input {
 }
 
 span {
-  white-space: pre;
+  white-space: normal;
   display: inline-block
 }
 
