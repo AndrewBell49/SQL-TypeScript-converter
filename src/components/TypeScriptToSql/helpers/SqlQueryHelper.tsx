@@ -113,7 +113,6 @@ export const getTextForCopying = (variableStates: Record<string, variablesInterf
 
     if (previousMultiple) {
       const startOfStringQuote = texts[i].substring(0, 3).indexOf("'")
-      console.log(startOfStringQuote)
       if (startOfStringQuote != -1) {
         nextText = texts[i].substring(0, startOfStringQuote)
         nextText += texts[i].substring(startOfStringQuote + 1)
@@ -125,6 +124,13 @@ export const getTextForCopying = (variableStates: Record<string, variablesInterf
 
     // remove quotes if multiple used
     if (variableStates[vars[i]] && variableStates[vars[i]].multiple) {
+      const indexOfEquals = nextText.substring(nextText.length - 5).indexOf('=')
+      if (indexOfEquals != -1) {
+        let removedEquals = nextText.substring(0, indexOfEquals + nextText.length - 5)
+        removedEquals += "IN"
+        removedEquals += nextText.substring(indexOfEquals + nextText.length - 5 + 1)
+        nextText = removedEquals
+      }
       const endOfStringQuote = nextText.substring(nextText.length - 3).lastIndexOf("'")
       if (endOfStringQuote == -1) {
         text += nextText

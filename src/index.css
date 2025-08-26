@@ -148,6 +148,11 @@ span {
   display: inline-block
 }
 
+.inline-container p,
+.inline-container div {
+  display: inline;
+}
+
 .variableChoice {
   display: inline-flex;
   align-items: center;
@@ -163,7 +168,8 @@ span {
 
 .variableChoice p,
 .variableChoice input,
-.variableChoice select {
+.variableChoice select,
+span p {
   margin: 0;
   border: 0;
 }

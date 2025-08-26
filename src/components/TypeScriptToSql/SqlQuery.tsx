@@ -16,7 +16,7 @@ function syncVariableStates(
     if (key in currentStates) {
       newStates[key] = currentStates[key];
     } else {
-      newStates[key] = { name: key, multiple: true };
+      newStates[key] = { name: key, multiple: !key.includes('.') };
     }
   })
   return newStates;
@@ -69,16 +69,13 @@ export default function SqlQuery({ query }: SqlQueryParams) {
         [...Array(vars.length)].map((_x, i) =>
           <>
 
-            <span style={{}}>
+            <span className='inline-container'>
               {texts[i].split('\n').map((line, idx) => (
                 <>
-                  {line} <br />
+                  <p>{line}</p>
                   {idx != (texts[i].split('\n').length - 1) && <br />}
                 </>
               ))}
-            </span>
-
-            <span>
               {
                 variableStates[vars[i]] ?
                   <>&#123;&#123;< VariableChoice key={vars[i]} original={vars[i]} variableState={variableStates[vars[i]]} onChange={onVariableChange} />&#125;&#125;</>
@@ -89,14 +86,14 @@ export default function SqlQuery({ query }: SqlQueryParams) {
           </>
         )
       }
-      <span>
+      <span className='inline-container'>
         {
           texts.length > 0 ?
             <>
               {
                 texts[texts.length - 1].split('\n').map((line, idx) => (
                   <>
-                    {line}
+                    <p>{line}</p>
                     {idx != (texts[texts.length - 1].split('\n').length - 1) && <br />}
                   </>
                 ))

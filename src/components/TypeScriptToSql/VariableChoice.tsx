@@ -40,7 +40,7 @@ export default function VariableChoice(
   }
 
   return (
-    <span className='variableChoice'>
+    <div className='variableChoice'>
 
       <input type='text' value={variableState.name} onChange={onVarNameChange} />
       <p>replacing {original}. Multiple?</p>
@@ -48,6 +48,6 @@ export default function VariableChoice(
 
       {error && <p className='error'>{error}</p>}
 
-    </span>
+    </div>
   )
 }
