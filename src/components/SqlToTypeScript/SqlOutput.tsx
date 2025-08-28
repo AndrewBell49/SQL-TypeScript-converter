@@ -83,6 +83,8 @@ export default function SqlOutput(
     const leftBraces = getIndexOfAll('{{', colonReplace);
     const rightBraces = getIndexOfAll('}}', colonReplace);
 
+    console.log(colonReplace)
+
     const { error, msg } = isInputError({ leftBraces, rightBraces })
     if (error) {
       setTexts([msg]);

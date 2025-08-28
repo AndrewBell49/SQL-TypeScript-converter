@@ -143,9 +143,13 @@ input {
   field-sizing: content;
 }
 
-span {
+/* span {
   white-space: normal;
   display: inline-block
+} */
+
+.inline-container {
+  white-space: pre-line;
 }
 
 .inline-container p,
@@ -186,6 +190,7 @@ span p {
 
 .sqlOutput {
   text-align: left;
+  white-space: pre;
 }
 
 @media (prefers-color-scheme: light) {

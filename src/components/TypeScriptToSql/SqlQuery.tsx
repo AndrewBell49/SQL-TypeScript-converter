@@ -45,62 +45,63 @@ export default function SqlQuery({ query }: SqlQueryParams) {
 
   // when new variables are added to the input, update state with changes
   useEffect(() => {
-    setVariableStates(syncVariableStates(variableKeys, variableStates))
+    const updatedStates = syncVariableStates(variableKeys, variableStates)
+    setVariableStates(updatedStates)
   }, [variableKeys])
 
   useEffect(() => {
 
-    const { texts, vars } = getTextsAndVars(query, originalQuery)
-    setTexts(texts);
-    setVars(vars);
+    const { texts: thisTexts, vars: thisVars } = getTextsAndVars(query, originalQuery)
+
+    setTexts(thisTexts);
+    setVars(thisVars);
 
     // get unique variable names
-    const newArr = Array.from(new Set(vars))
+    const newArr = Array.from(new Set(thisVars))
     // only change, if new elements have been added
     if (!arraysEqual(newArr, variableKeys)) {
-      variableKeys = Array.from(new Set(vars))
+      variableKeys = newArr
     }
 
   }, [query])
 
   return (
-    <div className='sqlOutput'>
+    <div className='sqlOutput inline-container'>
+      <div>
+        {Object.keys(variableStates)}
+      </div>
       {
         [...Array(vars.length)].map((_x, i) =>
           <>
 
-            <span className='inline-container'>
-              {texts[i].split('\n').map((line, idx) => (
-                <>
-                  <p>{line}</p>
-                  {idx != (texts[i].split('\n').length - 1) && <br />}
-                </>
-              ))}
-              {
-                variableStates[vars[i]] ?
-                  <>&#123;&#123;< VariableChoice key={vars[i]} original={vars[i]} variableState={variableStates[vars[i]]} onChange={onVariableChange} />&#125;&#125;</>
-                  : <></>
-              }
-            </span>
+            {texts[i].split('\n').map((line, idx) => (
+              <>
+                <p>{line}</p>
+                {idx != (texts[i].split('\n').length - 1) && <br />}
+              </>
+            ))}
+            {
+              variableStates[vars[i]] ?
+                <>&#123;&#123;< VariableChoice key={vars[i]} original={vars[i]} variableState={variableStates[vars[i]]} onChange={onVariableChange} />&#125;&#125;</>
+                : <></>
+            }
 
           </>
         )
       }
-      <span className='inline-container'>
-        {
-          texts.length > 0 ?
-            <>
-              {
-                texts[texts.length - 1].split('\n').map((line, idx) => (
-                  <>
-                    <p>{line}</p>
-                    {idx != (texts[texts.length - 1].split('\n').length - 1) && <br />}
-                  </>
-                ))
-              }
-            </> : <></>
-        }
-      </span>
+      {
+        texts.length > 0 ?
+          <>
+            {
+              texts[texts.length - 1].split('\n').map((line, idx) => (
+                <>
+                  <p>{line}</p>
+                  {idx != (texts[texts.length - 1].split('\n').length - 1) && <br />}
+                </>
+              ))
+            }
+          </> : <></>
+      }
 
       <br />
       <br />

@@ -13,6 +13,7 @@ interface isInputErrorParams {
 
 export const replaceColonWithBraces = (text: string) => {
   const colons = getIndexOfAll(':', text).reverse();
+  console.log(colons)
   colons.forEach((idx) => {
     const spaceStart = text.indexOf(' ', idx);
     const quoteStart = text.indexOf("'", idx);
